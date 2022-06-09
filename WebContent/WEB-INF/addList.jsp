@@ -2,7 +2,7 @@
 
 <%@ page import="com.javaex.vo.GuestbookVo" %>
 <%@ page import="java.util.List" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	List<GuestbookVo> guestList = (List<GuestbookVo>)request.getAttribute("guestList");
 %>
@@ -31,23 +31,19 @@
 	</form>
 	<br/>
 
-	<% 
-		for(GuestbookVo vo :guestList){
-	%>
+		<c:forEach var="vo" items="${guestList }">
 			<table  border="1" width="510px">
 				<tr>
-					<td>[<%=vo.getNo() %>]</td>
-					<td><%=vo.getName() %></td>
-					<td><%=vo.getRegDate() %></td>
-					<td><a href="/guestbook2/gbc?action=deleteform&no=<%=vo.getNo() %>">삭제</a></td>
+					<td>[${vo.no}]</td>
+					<td>[${vo.name}]></td>
+					<td>[${vo.regDate}]></td>
+					<td><a href="/guestbook2/gbc?action=deleteform&no=[${vo.no}]">삭제</a></td>
 				</tr>
 				<tr>
-					<td colspan="4"><%=vo.getContent() %></td>
+					<td colspan="4">[${vo.content}] %></td>
 				</tr>
 			</table>
 		    <br/>
-	<% 
-		}
-	%>
+		</c:forEach>		    
 </body>
 </html>
